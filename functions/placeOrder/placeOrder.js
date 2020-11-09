@@ -14,7 +14,7 @@ function generateOrderEmail({ order, total }) {
         )
         .join('')}
     </ul>
-    <p>Your total is <strong>$${total}</strong> due at pickup</p>
+    <p>Your total is <strong>${total}</strong> due at pickup</p>
     <style>
         ul {
           list-style: none;
@@ -23,11 +23,11 @@ function generateOrderEmail({ order, total }) {
   </div>`;
 }
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
+  host: process.env.MAIL_SMTP_SERVER,
+  port: process.env.MAIL_SMTP_PORT,
   auth: {
-    user: 'pauline.kautzer@ethereal.email',
-    pass: 'PhEQT4hdxxBnQ6FXyk',
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASSWORD,
   },
 });
 
@@ -51,7 +51,7 @@ exports.handler = async function (event, context) {
   const requiredFields = ['email', 'name', 'order'];
 
   for (const field of requiredFields) {
-    console.log(`Checking that ${field} is good`);
+    
     if (!body[field]) {
       return {
         statusCode: 400,
@@ -74,7 +74,7 @@ exports.handler = async function (event, context) {
   // send the email
   const info = await transporter.sendMail({
     from: "Slick's Slices <slick@example.com>",
-    to: `${body.name} <${body.email}>, orders@example.com`,
+    to: `${body.name} <${body.email}>, ${process.env.MAIL_USER}`,
     subject: 'New order!',
     html: generateOrderEmail({ order: body.order, total: body.total }),
   });
