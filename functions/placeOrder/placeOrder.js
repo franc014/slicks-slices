@@ -73,7 +73,7 @@ exports.handler = async function (event, context) {
   }
   // send the email
   const info = await transporter.sendMail({
-    from: "Slick's Slices <slick@example.com>",
+    from: `Slick's Slices < ${process.env.MAIL_USER}>`,
     to: `${body.name} <${body.email}>, ${process.env.MAIL_USER}`,
     subject: 'New order!',
     html: generateOrderEmail({ order: body.order, total: body.total }),

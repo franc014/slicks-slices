@@ -4,7 +4,8 @@ const MenuItemStyles = styled.div`
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-gap: 0 1.3rem;
+  gap: 2rem 1.3rem;
+  margin-bottom:1rem;
   align-content: center;
   align-items: center;
   position: relative;
