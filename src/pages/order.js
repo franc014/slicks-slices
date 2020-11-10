@@ -42,7 +42,7 @@ export default function OrderPage({ data }) {
       <OrderStyles onSubmit={submitOrder}>
         <fieldset disabled={loading}>
           <legend>Your Info</legend>
-          <label htmlFor="name">Names</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
