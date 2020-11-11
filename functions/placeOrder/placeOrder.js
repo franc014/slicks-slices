@@ -36,7 +36,7 @@ function wait(ms = 0) {
 }
 
 exports.handler = async function (event, context) {
-  await wait(3000);
+  
   const body = JSON.parse(event.body);
 
   // Check if they have filled out the honeypot
